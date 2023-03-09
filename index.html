@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <style>
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+    </style>
+    <script src="leaflet.js"></script>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="leaflet.awesome.rotate.min.css" />
+    <link rel="stylesheet" href="leaflet.awesome.rotate.min.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <meta
+      content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
+    <style>
+      #map_ff172f42cf1ccd0f9c5fc91ed472f370 {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+
+      .leaflet-popup{
+        width: max-content;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <button
+        type="button"
+        class="btn btn-primary btn-header"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Показатели системы
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-header"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModalSecond"
+      >
+        Координатная информация
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-header"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModalThird"
+      >
+        Результат
+      </button>
+    </header>
+    <div class="folium-map" id="map_ff172f42cf1ccd0f9c5fc91ed472f370"></div>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Показатели системы</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="tiles">
+              <div class="tileOne">
+                <div class="probability-job">
+                  <div class="title">Вероятность безотказной работы, Рбр</div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      >Время наработки на отказ средства спутниковой связи</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">T<sub>0(НИ)</sub> </span>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      >Периодичность смены позиции при маневрировании</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">t</span>
+                  </div>
+                </div>
+                <div class="time-decision">
+                  <div class="title">
+                    Время решения задачи топопривязки, Ттп(расч)
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Время поиска сигнала</span>
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">Tп </span>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      >Время выделения цифровой информации</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">Тци</span>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Время приема альманаха</span>
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">Тал</span>
+                    <span class="input-group-text"
+                      >Альманах загружен заранее
+                      <input class="form-check-input" type="checkbox" value=""
+                    /></span>
+                  </div>
+                </div>
+                <div class="navigation">
+                  <div class="title">
+                    Своевременность навигационных измерений, Рт
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      >Время для решения задачи топопривязки</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">Ттп (необх)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="tileTwo">
+                <div class="title-mid">Показатели</div>
+                <div class="notEnd">
+                  <div class="title">Непрерывности, Рн</div>
+                  <div class="input-group input-group-sm mb-3 table-group">
+                    <div class="sub-title">Время наработки на отказ</div>
+                    <div class="table-wrapper">
+                      <table class="table align-middle">
+                        <thead>
+                          <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">Значение</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>ССН То(ни)1</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>ССН То(ни)2</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>ССН То(ни)3</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>ССН То(ни)4</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td>ССН То(ни)5</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">6</th>
+                            <td>ССН То(ни)6</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">7</th>
+                            <td>ССН То(ни)7</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">8</th>
+                            <td>ССН То(ни)8</td>
+                            <td>
+                              <input
+                                type="text"
+                                placeholder="0"
+                                class="form-control"
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="thatAll">
+                  <div class="title">Целостности, Рц</div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      >Время между отказами источников <br />
+                      радионавигационных сигналов</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">Тотк</span>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      >Вероятность обнаружения сигналов</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                    />
+                    <span class="input-group-text">Робн</span>
+                  </div>
+                  <div class="coefficient-reability">
+                    <div class="title">Коэффициент надежности, Кн</div>
+                    <div class="input-group input-group-sm mb-3">
+                      <span class="input-group-text"
+                        >Показатель доступности</span
+                      >
+                      <input
+                        type="text"
+                        placeholder="0.00"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                      />
+                      <span class="input-group-text">Рд</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="results">
+              <div class="title">Результаты</div>
+              <div class="table-wrapper-result">
+                <table class="table align-middle table-success">
+                  <thead>
+                    <tr>
+                      <th scope="col">Рбр</th>
+                      <th scope="col">Ттп</th>
+                      <th scope="col">Рт</th>
+                      <th scope="col">Рн</th>
+                      <th scope="col">Рц</th>
+                      <th scope="col">Кн</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="tableRows">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Закрыть
+            </button>
+            <button type="button" class="btn btn-primary btn-save">
+              Сохранить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModalSecond"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Координатная информация</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body modal-body-second">
+            <div class="tile">
+              <div class="title">
+                Количество координатной информации РЛО, I<sub>рло</sub>
+              </div>
+              <div class="position-district">
+                <div class="title">Позиционный район РЛО</div>
+                <div class="table-wrapper">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Широта</th>
+                        <th scope="col">Долгота</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="pos-dist-rlo">
+                        <th scope="row">1</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="1"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="2"
+                          />
+                        </td>
+                      </tr>
+                      <tr class="pos-dist-rlo">
+                        <th scope="row">2</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="3"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="4"
+                          />
+                        </td>
+                      </tr>
+                      <tr class="pos-dist-rlo">
+                        <th scope="row">3</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="5"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="6"
+                          />
+                        </td>
+                      </tr>
+                      <tr class="pos-dist-rlo">
+                        <th scope="row">4</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="7"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                            id="8"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  class="input-group input-group-pos-dist-rlo input-group-sm mb-3"
+                >
+                  <span class="input-group-text">Неопр. дир. угла</span>
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    class="form-control input-dir-corner-rlo"
+                    aria-label="Sizing example input"
+                  />
+                  <span class="input-group-text">а(рло)</span>
+                </div>
+                <div
+                  class="input-group input-group-pos-dist-rlo input-group-sm mb-3"
+                >
+                  <span class="input-group-text">Перепад высот</span>
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    class="form-control input-height-rlo"
+                    aria-label="Sizing example input"
+                  />
+                  <span class="input-group-text">h(рло)</span>
+                </div>
+              </div>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text"
+                  >Расстояние между антеннами ССР на РЛО</span
+                >
+                <input
+                  type="text"
+                  placeholder="0.00"
+                  class="form-control input-distance-rlo"
+                  aria-label="Sizing example"
+                />
+                <span class="input-group-text">D<sub>рло</sub></span>
+              </div>
+              <button type="button" class="btn btn-calc-rlo btn-success">
+                Расчитать РЛО
+              </button>
+            </div>
+            <div class="tile">
+              <div class="title">
+                Количество координатной информации РПН, I<sub>рпн</sub>
+              </div>
+              <div class="position-district">
+                <div class="title">Позиционный район РПН</div>
+                <div class="table-wrapper">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Широта</th>
+                        <th scope="col">Долгота</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="pos-dist-rpn">
+                        <th scope="row">1</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr class="pos-dist-rpn">
+                        <th scope="row">2</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr class="pos-dist-rpn">
+                        <th scope="row">3</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr class="pos-dist-rpn">
+                        <th scope="row">4</th>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="0"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  class="input-group input-group-pos-dist-rpn input-group-sm mb-3"
+                >
+                  <span class="input-group-text">Неопр. дир. угла</span>
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    class="form-control input-dir-corner-rpn"
+                    aria-label="Sizing example input"
+                  />
+                  <span class="input-group-text">а(рпн)</span>
+                </div>
+                <div
+                  class="input-group input-group-pos-dist-rpn input-group-sm mb-3"
+                >
+                  <span class="input-group-text">Перепад высот</span>
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    class="form-control input-height-rpn"
+                    aria-label="Sizing example input"
+                  />
+                  <span class="input-group-text">h(рпн)</span>
+                </div>
+              </div>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text"
+                  >Расстояние между антеннами ССР на РПН</span
+                >
+                <input
+                  type="text"
+                  placeholder="0.00"
+                  class="form-control input-distance-rpn"
+                  aria-label="Sizing example input"
+                />
+                <span class="input-group-text">D<sub>рпн</sub></span>
+              </div>
+              <button type="button" class="btn btn-calc-rpn btn-success">
+                Расчитать РПН
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-toggle="modal"
+            >
+              Закрыть
+            </button>
+            <button type="button" class="btn btn-primary btn-save-res">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModalThird"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Функциональные дополнения</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="res">
+              <div class="results res-func-dop">
+                <div class="title">Список Функциональных дополнений</div>
+                <div class="table-wrapper-result">
+                  <table class="table align-middle table-success">
+                    <thead>
+                      <tr>
+                        <th scope="col">Элементы ФД</th>
+                        <th scope="col">Средняя стоимость (у.е.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="tableRows">
+                        <td>
+                          Тракт формирования радионавигационных сигналов
+                          стандартной точности одного диапазона 1600 МГц
+                        </td>
+                        <td>300</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Тракт формирования радионавигационных сигналов
+                          стандартной точности двух диапазонов 1600 и 1250 МГц
+                        </td>
+                        <td>350</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Тракт формирования радионавигационных сигналов
+                          вы-сокой точности одного диапазона 1600 МГц
+                        </td>
+                        <td>400</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Тракт формирования радионавигационных сигналов
+                          вы-сокой точности двух диапазонов 1600 и 1250 МГц
+                        </td>
+                        <td>500</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>Шасси ПС с усилителем мощности 10 Вт</td>
+                        <td>800</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>Шасси ПС с усилителем мощности 25 Вт</td>
+                        <td>1000</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Тракт формирования корректирующей информации с выдачей
+                          поправок по псевдодальностям
+                        </td>
+                        <td>1060</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Тракт формирования корректирующей информации с выдачей
+                          поправок по координатам
+                        </td>
+                        <td>1010</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Блок контроля целостности с одним методом контроля
+                        </td>
+                        <td>100</td>
+                      </tr>
+                      <tr class="tableRows">
+                        <td>
+                          Блок контроля целостности с двумя методами контроля
+                        </td>
+                        <td>150</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="res-elem">
+                <div class="results">
+                  <div class="title">Необходимые функциональные дополнения для РЛО</div>
+                  <div class="table-wrapper-result">
+                    <table class="table align-middle table-success">
+                      <thead>
+                        <tr>
+                          <th scope="col">Функциональные дополнения</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody-rlo">
+                        <tr class="tableRows">
+                          <td>
+                            Данные не были введены
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="results">
+                  <div class="title">Необходимые функциональные дополнения для РПН</div>
+                  <div class="table-wrapper-result">
+                    <table class="table align-middle table-success">
+                      <thead>
+                        <tr>
+                          <th scope="col">Функциональные дополнения</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody-rpn">
+                        <tr class="tableRows">
+                          <td>
+                            Данные не были введены
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Закрыть
+            </button>
+            <button type="button" class="btn btn-primary btn-save">
+              Сохранить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="/eel.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="coorInforms.js"></script>
+  <script src="optionsSistem.js"></script>
+  <script src="results.js"></script>
+  <script src="jquery-3.6.3.min.js"></script>
+  <script src="map.js"></script>
+  <script>
+    var lat_lng_popup_7b08f22fbeba9bc7c1ec115723419ad1 = L.popup();
+    function latLngPop(e) {
+      lat_lng_popup_7b08f22fbeba9bc7c1ec115723419ad1
+        .setLatLng(e.latlng)
+        .setContent(
+          "Latitude: " +
+            e.latlng.lat.toFixed(4) +
+            "<br>Longitude: " +
+            e.latlng.lng.toFixed(4)
+        )
+        .openOn(map_ff172f42cf1ccd0f9c5fc91ed472f370);
+    }
+    map_ff172f42cf1ccd0f9c5fc91ed472f370.on("click", latLngPop);
+
+    function areaRlo(data) {
+      console.log(data);
+      var polygon_97c138f7961ea4cd238675cfb309de3c = L.polygon(data, {
+        bubblingMouseEvents: true,
+        color: "#00FF00",
+        dashArray: null,
+        dashOffset: null,
+        fill: true,
+        fillColor: "#ADFF2F",
+        fillOpacity: 0.2,
+        fillRule: "evenodd",
+        lineCap: "round",
+        lineJoin: "round",
+        noClip: false,
+        opacity: 1.0,
+        smoothFactor: 1.0,
+        stroke: true,
+        weight: 3,
+      }).addTo(map_ff172f42cf1ccd0f9c5fc91ed472f370);
+
+      var popup_61a78cd62bf0cdf228ee3ee709fe3976 = L.popup({
+        maxWidth: "100%",
+      });
+
+      var html_d6e5b4ec2e90cb07dcdbd288ae9835b1 = $(
+        `<div id="html_d6e5b4ec2e90cb07dcdbd288ae9835b1">
+          <span>РЛО:</span><hr>
+          <span>Iрло = ${i_rlo}</span><hr>
+          <span>Iрло треб = ${I_TREB_RLO}</span><hr>
+          <span>Sрло = ${square_rlo}</span><hr>
+          <span>СКОr1 = ${Sko_rlo.Skor1}</span><hr>
+          <span>СКОr2 = ${Sko_rlo.Skor2}</span><hr>
+          <span>Ктп рло = ${Ktp_rlo}</span><hr>
+          </div>`
+      )[0];
+
+      popup_61a78cd62bf0cdf228ee3ee709fe3976.setContent(
+        html_d6e5b4ec2e90cb07dcdbd288ae9835b1
+      );
+
+      polygon_97c138f7961ea4cd238675cfb309de3c.bindPopup(
+        popup_61a78cd62bf0cdf228ee3ee709fe3976
+      );
+
+      polygon_97c138f7961ea4cd238675cfb309de3c.bindTooltip(
+        `<div>Область РЛО</div>`,
+        { sticky: true }
+      );
+    }
+    function areaRpn(data) {
+      var polygon_97c138f7961ea4cd238675cfb309de2c = L.polygon(data, {
+        bubblingMouseEvents: true,
+        color: "#DC143C",
+        dashArray: null,
+        dashOffset: null,
+        fill: true,
+        fillColor: "#FA8072",
+        fillOpacity: 0.2,
+        fillRule: "evenodd",
+        lineCap: "round",
+        lineJoin: "round",
+        noClip: false,
+        opacity: 1.0,
+        smoothFactor: 1.0,
+        stroke: true,
+        weight: 3,
+      }).addTo(map_ff172f42cf1ccd0f9c5fc91ed472f370);
+
+      var popup_61a78cd62bf0cdf228ee3ee709fe3977 = L.popup({
+        maxWidth: "100%",
+      });
+      
+      var html_d6e5b4ec2e90cb07dcdbd288ae9835b2 = $(
+        `<div id="html_d6e5b4ec2e90cb07dcdbd288ae9835b1" style="width: 100.0%; height: 100.0%;">
+          <span>РПН:</span><hr>
+          <span>Iрпн = ${i_rpn}</span><hr>
+          <span>Iрпн треб = ${I_TREB_RPN}</span><hr>
+          <span>Sрло = ${square_rpn}</span><hr>
+          <span>СКОr1 = ${Sko_rpn.Skor1}</span><hr>
+          <span>СКОr2 = ${Sko_rpn.Skor2}</span><hr>
+          <span>Ктп рло = ${Ktp_rpn}</span><hr>
+         </div>`
+      )[0];
+
+      popup_61a78cd62bf0cdf228ee3ee709fe3977.setContent(
+        html_d6e5b4ec2e90cb07dcdbd288ae9835b2
+      );
+
+      polygon_97c138f7961ea4cd238675cfb309de2c.bindPopup(
+        popup_61a78cd62bf0cdf228ee3ee709fe3977
+      );
+
+      polygon_97c138f7961ea4cd238675cfb309de2c.bindTooltip(
+        `<div>Область РПН</div>`,
+        { sticky: true }
+      );
+    }
+  </script>
+</html>

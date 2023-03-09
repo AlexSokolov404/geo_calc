@@ -1,0 +1,189 @@
+header{
+    position: fixed;
+    width: 100vw;
+    padding: 2px 20px 2px 10px;
+    background-color: white;
+    display: flex;
+    border-bottom: 2px solid black;
+    z-index: 999;
+}
+
+.leaflet-top{
+    margin-top: 45px;
+}
+
+.btn-header{
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.modal-content{
+    z-index: 99999;
+}
+
+.dropdown-menu{
+    z-index: 9999;
+}
+
+.tiles{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tileOne{
+    margin-right: 20px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+}
+
+.probability-job, .time-decision{
+    position: relative;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+    margin-bottom: 15px;
+}
+
+.navigation{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+    position: relative;
+}
+
+.input-group-text input{
+    margin-left: 5px;
+}
+
+.form-value{
+    position: relative;
+    height: 70vh;
+    display: flex;
+    padding: 10px;
+    border: 1px solid grey;
+}
+
+.table-wrapper{
+    height: 40vh;
+    overflow-y: scroll;
+}
+
+.table{
+    margin-bottom: 0;
+    
+}
+
+.title-mid{
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background-color: white;
+}
+
+.notEnd{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.notEnd .input-group{
+    margin-top: 5px;
+}
+
+.table-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.tileTwo{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+    position: relative;
+    display: flex;
+}
+
+.title{
+    background-color: white;
+    position: absolute;
+    top: -14px;
+    left: 15px; 
+}
+
+.thatAll{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+    position: relative;
+}
+
+.coefficient-reability{
+    position: relative;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+}
+
+.coefficient-reability .input-group{
+    margin-bottom: 0px;
+}
+
+.results{
+    position: relative;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.input-group-text{
+    text-align: left;
+}
+
+.modal-body-second{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.res{
+    display: flex;
+    justify-content: space-between;
+}
+
+.res .res-func-dop{
+    width: 49%;
+    font-size: 18px;
+}
+
+.res .res-elem{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.tile{
+    position: relative;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 25px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.position-district{
+    position: relative;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+}
